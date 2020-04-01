@@ -1,0 +1,33 @@
+o) Install PostgreSQL
+    - Using PostgreSQL Version 12
+    - Includes pgadmin
+    - Password: {code: leet!}
+    - Port: 5432
+
+o) Using Python 3.8.2
+    - Django 2.2
+
+o) Create a virtual environment
+    - `py -3.8 -m venv gtpaper-env`
+    - gtpaper-env\Scripts\activate
+
+o) Create the project inside of the virtual environment (so the virtual env is not in the repo)
+    - `django-admin.py startproject gtpaper`
+
+o) Install libraries
+    - `py -m pip3 install django`
+    - djang-graphql
+    - uwsgi
+    - nginx?
+
+o) Action item: Store licenses of libraries in folder
+
+o) Control-shift-enter: windows "Run" command as admin...
+
+o) In gtpaper-env folder:
+    - `django-admin.py startproject gtpaper`
+
+o) Move some files into directory, .gitignore, README.md, create client folder, etc.
+
+
+
