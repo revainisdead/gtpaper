@@ -15,17 +15,30 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+def get_secret_key():
+    SECRET_LOCATION = "gtpaper"
+    SECRET_FILE = "secret.key"
+
+    try:
+        with open(os.path.join(SECRET_LOCATION, SECRET_FILE), "r") as f:
+            secret = f.read().rstrip()
+            print("[Temp] Secret key: {}".format(secret))
+            return secret
+    except (FileNotFoundError, PermissionError) as e:
+        #XXX logger.error(e, msg)??? how does logger capture exceptions.
+        print(e)
+        print("Error: must put secret file in the correct secret location.")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'kl-l@%9^8!^ecvx^c(t+ul!d$z7b)4($-v26)(w79s89((9yg4'
+SECRET_KEY = get_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,6 +51,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+# add graphene_django
+
+#GRAPHENE = {
+#    "SCHEMA": "gtpaper.schema.schema",
+#}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -69,14 +87,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'gtpaper.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'gtpaper',
+        'USER': 'gtpaper',
+        'PASSWORD': 'gtpaper',
+        'HOST': 'localhost',
+        'POST': '',
     }
 }
 

@@ -30,4 +30,10 @@ o) In gtpaper-env folder:
 o) Move some files into directory, .gitignore, README.md, create client folder, etc.
 
 
+o) Database
+    - Add postgres directory to path
+    - `psql -U postgres`
+    - CREATE DATABASE gtpaper;
+    - CREATE USER gtpaper WITH PASSWORD 'gtpaper';
+    - GRANT ALL PRIVILEGES ON DATABASE gtpaper TO gtpaper;
 
