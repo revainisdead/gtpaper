@@ -21,13 +21,9 @@ def get_secret_key():
 
     try:
         with open(os.path.join(SECRET_LOCATION, SECRET_FILE), "r") as f:
-            secret = f.read().rstrip()
-            print("[Temp] Secret key: {}".format(secret))
-            return secret
+            return f.read().rstrip()
     except (FileNotFoundError, PermissionError) as e:
-        #XXX logger.error(e, msg)??? how does logger capture exceptions.
-        print(e)
-        print("Error: must put secret file in the correct secret location.")
+        print("Error: must put secret file in the correct secret location. {}".format(e))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -36,7 +32,13 @@ def get_secret_key():
 SECRET_KEY = get_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+PROD = os.environ.get("GTPAPER_PROD", False)
+if PROD:
+    print("Production")
+    DEBUG = False
+else:
+    print("Development")
+    DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -44,24 +46,25 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'gtpaper',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'graphene_django',
 ]
-# add graphene_django
 
-#GRAPHENE = {
-#    "SCHEMA": "gtpaper.schema.schema",
-#}
+GRAPHENE = {
+    "SCHEMA": "gtpaper.schema.schema",
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -131,8 +134,13 @@ USE_L10N = True
 
 USE_TZ = True
 
+CSRF_COOKIE_NAME = "csrftoken"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# For Production this must have a value
+# STATIC_ROOT="..." # collectstatic drops files at this location
+

@@ -14,8 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.conf.urls import url
+
+from graphene_django.views import GraphQLView
+
+# XXX Ignore migration warning: URL name 'url' isn't unique:
+#
+# Since admin urls are checked before the catch all (last url),
+# this warning should be irrelevant.
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    url(r"^admin/", admin.site.urls),
+    url(r"^graphql", GraphQLView.as_view(graphiql=True)),
+    # These two must be last.
+    url(r"^", admin.site.urls),
+    url(r"^(?:.*)/?", admin.site.urls),
 ]

@@ -1,3 +1,6 @@
+Installation Documentation
+--------------------------
+
 o) Install PostgreSQL
     - Using PostgreSQL Version 12
     - Includes pgadmin
@@ -15,7 +18,7 @@ o) Create the project inside of the virtual environment (so the virtual env is n
     - `django-admin.py startproject gtpaper`
 
 o) Install libraries
-    - `py -m pip3 install django`
+    - `(gtpaper-env) py -m pip3 install django`
     - djang-graphql
     - uwsgi
     - nginx?
@@ -36,4 +39,36 @@ o) Database
     - CREATE DATABASE gtpaper;
     - CREATE USER gtpaper WITH PASSWORD 'gtpaper';
     - GRANT ALL PRIVILEGES ON DATABASE gtpaper TO gtpaper;
+    - `psql -U gtpaper`
 
+o) Change settings.py to use database settings
+
+(SKIPPED)
+o) Run migrations
+    - `py manage.py migrate`
+
+o) Add GraphQL
+    - Install graphene-django
+        - In elevated prompt: `(gtpaper-env) pip install graphene-django`
+        - Update requirements.txt `pip freeze > requirements.txt`
+    - Create a bit of mock data
+    - User (front end auth, but still need Users)
+    - Post (blob - big large binary object?)
+        - pk
+        - id (private, unique id, to refer to this, that isn't pk)
+        - title
+        - body
+
+o) Test
+    - `http://localhost:3000/graphql`
+
+o) 
+
+
+To Do
+-----
+o) Login
+    - `http://localhost:3000/accounts/login`
+    - All front end pages redirect to login if not signed in
+
+o) Add csrf
