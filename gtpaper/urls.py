@@ -14,7 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+
 from django.conf.urls import url
+from django.urls import path
 
 from graphene_django.views import GraphQLView
 
@@ -22,11 +24,10 @@ from graphene_django.views import GraphQLView
 #
 # Since admin urls are checked before the catch all (last url),
 # this warning should be irrelevant.
-
 urlpatterns = [
-    url(r"^admin/", admin.site.urls),
-    url(r"^graphql", GraphQLView.as_view(graphiql=True)),
+    path("admin/", admin.site.urls),
+    path("graphql/", GraphQLView.as_view(graphiql=True)),
     # These two must be last.
-    url(r"^", admin.site.urls),
-    url(r"^(?:.*)/?", admin.site.urls),
+    url(r"^$", GraphQLView.as_view(graphiql=True)), # matches just an empty string
+    url(r"^(?:.*)/?", admin.site.urls), # matches all urls
 ]

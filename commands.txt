@@ -71,9 +71,18 @@ o) Add GraphQL
 o) Test
     - `http://localhost:3000/graphql`
 
-o) Fix for "AssertionError: Mutation fields must be a mapping (dict / OrderedDict) with field names as keys or a function which returns such a mapping."
+o) Fix "AssertionError: Mutation fields must be a mapping (dict / OrderedDict) with field names as keys or a function which returns such a mapping."
     - Don't include Mutation in schema until needed.
 
+o) Create React App
+    - `npm uninstall -g create-react-app`
+    - `npx create-react-app .`
+
+o) Add libraries
+    - `npm install --save react-bootstrap`
+
+o) I forgot to update npx
+    - `npm install --global npx --force`
 
 To Do
 -----
