@@ -1,21 +1,21 @@
 import graphene
+from graphene_django.types import DjangoObjectType
 
-from gtpaper.models import User
+from django.contrib.auth.models import User
 
 
-class UserQL(graphene.ObjectType):
+print("testzero", User)
+print("test", User.objects.all())
+class UserType(DjangoObjectType):
     class Meta:
         model = User
 
 
 class Query(graphene.ObjectType):
-    users = graphene.List(UserQL)
+    users = graphene.List(UserType)
 
-    def resolve_users(self):
+    def resolve_users(self, info):
         return User.objects.all()
 
 
-class Mutation(graphene.ObjectType):
-    pass
-
-schema = graphene.Schema(query=Query, mutation=Mutation)
+schema = graphene.Schema(query=Query)

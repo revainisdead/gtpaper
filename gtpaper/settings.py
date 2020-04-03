@@ -135,6 +135,10 @@ USE_L10N = True
 USE_TZ = True
 
 CSRF_COOKIE_NAME = "csrftoken"
+CSRF_COOKIE_SECURE = False # not https
+
+# To extend default user model
+#AUTH_USER_MODEL = gtpaper.models.User
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

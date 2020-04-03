@@ -43,9 +43,18 @@ o) Database
 
 o) Change settings.py to use database settings
 
-(SKIPPED)
 o) Run migrations
     - `py manage.py migrate`
+
+o) Add admin user
+    - `py manage.py createsuper`
+    - Username: admin
+    - Password: life6565
+
+o) To log in to admin, had to delete incorrect csrf cookies (don't know why)
+    - Find cookies in chrome
+    - Delete last couple if they don't look correct
+    - Click on ip/host and then click csrftoken and click delete
 
 o) Add GraphQL
     - Install graphene-django
@@ -62,7 +71,8 @@ o) Add GraphQL
 o) Test
     - `http://localhost:3000/graphql`
 
-o) 
+o) Fix for "AssertionError: Mutation fields must be a mapping (dict / OrderedDict) with field names as keys or a function which returns such a mapping."
+    - Don't include Mutation in schema until needed.
 
 
 To Do
@@ -71,4 +81,8 @@ o) Login
     - `http://localhost:3000/accounts/login`
     - All front end pages redirect to login if not signed in
 
-o) Add csrf
+o) Add csrf middleware
+
+o) Instead of using email to login, add google oauth api authentication
+
+o)
