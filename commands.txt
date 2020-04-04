@@ -84,6 +84,22 @@ o) Add libraries
 o) I forgot to update npx
     - `npm install --global npx --force`
 
+o) Set up scripts the run the server
+    - alias workflow: gtp -> gtpact
+
+o) Install Front End dependencies
+    - `npm install apollo-boost @apollo/react-hooks graphql`
+
+Odd fix for graphql "ERR! peer dep missing: graph..."
+    - npm uninstall graphql... (downgrade)
+    - npm uninstall graphql... (downgrade)
+    - npm uninstall graphql... (downgrade)
+    - `npm list --depth=0` says unmet dependency at version
+    - exact version: `npm install graph@^14.3.1`
+    - worked: also install typescript
+    - `npm install typescript`
+
+
 To Do
 -----
 o) Login

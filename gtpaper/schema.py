@@ -4,8 +4,6 @@ from graphene_django.types import DjangoObjectType
 from django.contrib.auth.models import User
 
 
-print("testzero", User)
-print("test", User.objects.all())
 class UserType(DjangoObjectType):
     class Meta:
         model = User

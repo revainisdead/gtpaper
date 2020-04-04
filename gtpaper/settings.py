@@ -34,10 +34,10 @@ SECRET_KEY = get_secret_key()
 # SECURITY WARNING: don't run with debug turned on in production!
 PROD = os.environ.get("GTPAPER_PROD", False)
 if PROD:
-    print("Production")
+    print("In Production")
     DEBUG = False
 else:
-    print("Development")
+    print("In Development")
     DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
@@ -68,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'gtpaper.middleware.custom_csrf_middleware',
 ]
 
 ROOT_URLCONF = 'gtpaper.urls'
@@ -134,7 +135,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-CSRF_COOKIE_NAME = "csrftoken"
+#CSRF_COOKIE_NAME = "csrftoken"
 CSRF_COOKIE_SECURE = False # not https
 
 # To extend default user model

@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.conf.urls import url
 from django.urls import path
 
+from django.views.decorators.csrf import csrf_exempt
+
 from graphene_django.views import GraphQLView
 
 # XXX Ignore migration warning: URL name 'url' isn't unique:
@@ -26,8 +28,8 @@ from graphene_django.views import GraphQLView
 # this warning should be irrelevant.
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("graphql/", GraphQLView.as_view(graphiql=True)),
+    path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True))),
     # These two must be last.
-    url(r"^$", GraphQLView.as_view(graphiql=True)), # matches just an empty string
+    url(r"^$", csrf_exempt(GraphQLView.as_view(graphiql=True))), # matches just an empty string
     url(r"^(?:.*)/?", admin.site.urls), # matches all urls
 ]
