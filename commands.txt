@@ -99,6 +99,16 @@ Odd fix for graphql "ERR! peer dep missing: graph..."
     - worked: also install typescript
     - `npm install typescript`
 
+o) Csrf header not being added
+    - Need to eject apollo boost and use apollo client directly
+    - Change
+        - from: `import ApolloClient from 'apollo-boost';`
+        - to:   `import ApolloClient from 'apollo-client';`
+
+o) Use apollo client
+    - `npm install apollo-client apollo-cache-inmemory apollo-link-http apollo-link-error apollo-link graphql-tag`
+
+
 
 To Do
 -----
