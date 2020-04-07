@@ -29,12 +29,22 @@ function __getCookie(name) {
 // bugs for a long time and will never load json.
 // The response will always be html.
 //
-// Research this and add some urls here.
+// The problem is that I am spoiled from using django, it has a setting
+// APPEND_SLASH set to True by default, that redirects urls to the version
+// with the trailing slash when http://example.com/api is used, for example.
+// Since redirects don't carry the state of the request with them, the
+// original POST data is dropped.
 //
-// Note that using ApolloBoost, it works without the trailing slash.
+// I learned to always add the slash at the end today.
+//
+// See: https://stackoverflow.com/questions/9738824/django-post-url-error
+//
+// (Note that using ApolloBoost, it works without the trailing slash)
+
 const httpLink = new HttpLink({
     uri: "/graphql/",
 });
+
 
 const csrfMiddleware = new ApolloLink((operation, forward) => {
     operation.setContext(() => {

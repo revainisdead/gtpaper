@@ -30,6 +30,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("graphql/", GraphQLView.as_view(graphiql=True)),
     url(r"^$", views.index), # matches the root
-    #url(r"^$", GraphQLView.as_view(graphiql=False)), # test
     url(r"^.*$", views.index), # matches all urls
 ]
