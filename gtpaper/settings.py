@@ -54,21 +54,24 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'graphene_django',
+    'corsheaders',
 ]
 
 GRAPHENE = {
     "SCHEMA": "gtpaper.schema.schema",
 }
 
+#'corsheaders.middleware.CorsMiddleware',
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    #'gtpaper.middleware.allow_headers_middleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'gtpaper.middleware.allow_headers_middleware',
 ]
 
 ROOT_URLCONF = 'gtpaper.urls'
@@ -149,4 +152,6 @@ STATIC_URL = '/static/'
 # For Production this must have a value
 settings_dir = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(settings_dir, "..", "static") # collectstatic drops files at this location
+
+#APPEND_SLASH = False
 

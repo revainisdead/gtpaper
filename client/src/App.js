@@ -23,8 +23,9 @@ const test = (props) => {
     client
         .query({
             query: gql`
-                {
+                query {
                     users {
+                        id
                         username
                         firstName
                         lastName

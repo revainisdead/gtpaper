@@ -37,8 +37,7 @@ react_dir_index = os.path.join(file_dir, "../client/build/", "index.html")
 def index(request):
     try:
         with open(react_dir_index, "r") as f:
-            #print("Found index.html")
-            print(f.read())
+            print("Found index.html")
             return HttpResponse(f.read())
 
             #import json

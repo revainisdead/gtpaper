@@ -1,38 +1,49 @@
 import ApolloClient from 'apollo-client';
 import { HttpLink } from "apollo-link-http";
-import { ApolloLink, concat } from "apollo-link";
+import { ApolloLink } from "apollo-link";
 import { onError } from "apollo-link-error";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
 
-const __csrftoken = () => {
-    // Getting "csrftoken" key from the cookie's single key-value pair.
-    let csrftoken;
-
-    if (document.cookie !== "" && document.cookie) {
-        try {
-            csrftoken = document.cookie.split("=")[1];
-        } catch(e) {
-            console.log(e);
+// Source: https://docs.djangoproject.com/en/3.0/ref/csrf/
+function __getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
         }
     }
-
-    return csrftoken;
+    return cookieValue;
 }
 
-const httpLink = new HttpLink({uri: "/graphql"});
+
+// XXX
+// 
+// Need trailing slash, without which, will cause hidden
+// bugs for a long time and will never load json.
+// The response will always be html.
+//
+// Research this and add some urls here.
+//
+// Note that using ApolloBoost, it works without the trailing slash.
+const httpLink = new HttpLink({
+    uri: "/graphql/",
+});
 
 const csrfMiddleware = new ApolloLink((operation, forward) => {
-    console.log("TEST");
-    operation.setContext((test_args) => {
-        console.log(test_args);
-
-        console.log('operation', operation);
-        console.log('setContext', operation.setContext);
-
+    operation.setContext(() => {
         return {
             headers: {
-                "X-CSRFToken": __csrftoken()
+                "X-CSRFToken": __getCookie("csrftoken"),
+            },
+            fetchOptions: {
+                mode: "cors",
             }
         }
     });
@@ -53,6 +64,10 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     }
 });
 
+
+// Need to create ApolloClient directly from 'apollo-client' not 'apollo-boost'
+// to add custom links.
+// - https://www.apollographql.com/docs/react/migrating/boost-migration/
 const client = new ApolloClient({
     link: ApolloLink.from([
         errorLink,
@@ -61,17 +76,6 @@ const client = new ApolloClient({
     ]),
     cache: new InMemoryCache(),
 });
-
-
-// Need to create ApolloClient directly from 'apollo-client' not 'apollo-boost'
-// to add custom links.
-// - https://www.apollographql.com/docs/react/migrating/boost-migration/
-/*
-const client = new ApolloClient({
-    link: concat(csrfMiddleware, httpLink),
-    cache: new InMemoryCache(),
-});
-*/
 
 
 export default client;

@@ -121,6 +121,9 @@ o) Can't load html because javascript isn't loaded
     - `py manage.py collectstatic`
 
 
+o) Django cors middleware
+    - `pip install django-cors-middleware`
+
 
 To Do
 -----

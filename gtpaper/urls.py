@@ -22,7 +22,6 @@ from graphene_django.views import GraphQLView
 
 from gtpaper import views
 
-print(views.index)
 # XXX Ignore migration warning: URL name 'url' isn't unique:
 #
 # Since admin urls are checked before the catch all (last url),
@@ -30,9 +29,7 @@ print(views.index)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("graphql/", GraphQLView.as_view(graphiql=True)),
-    # These two must be last.
-    # Not needed if the root matches the home page in the front end
     url(r"^$", views.index), # matches the root
-    #url(r"^(?:.*)/?", views.index), # matches all urls
+    #url(r"^$", GraphQLView.as_view(graphiql=False)), # test
     url(r"^.*$", views.index), # matches all urls
 ]
