@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "proxy": "http://localhost:5000/",
-  "__comment_proxy": "Absolutely must include this value or will get html in the response.",
+  "__comment_proxy": "Absolutely must include the trailing slash after port or will get html in the response.",
   "private": true,
   "dependencies": {
     "@apollo/react-hooks": "^3.1.4",

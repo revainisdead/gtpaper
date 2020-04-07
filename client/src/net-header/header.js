@@ -1,7 +1,7 @@
 import ApolloClient from 'apollo-client';
 import { HttpLink } from "apollo-link-http";
 import { ApolloLink, concat } from "apollo-link";
-//import { onError } from "apollo-link-error";
+import { onError } from "apollo-link-error";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
 
@@ -41,40 +41,37 @@ const csrfMiddleware = new ApolloLink((operation, forward) => {
 });
 
 
-/*
-const onerrorClientLink = ( props ) => {
-    if (props && (props.graphQLErrors || props.graphQLErrors)) {
-        if (props.graphQLErrors) {
-            props.graphQLErrors.forEach(({ message, locations, path }) => {
-                console.log(`[GraphQL error]: Custom Link error message: ${message}, Location: ${locations}, Path: ${path}`);
-            });
-        }
-
-        if (props.networkError) {
-            console.log(`[Network error]: ${props.networkError}`);
-        }
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors) {
+        graphQLErrors.forEach(({ message, locations, path }) => {
+            console.log(`[GraphQL error]: Custom Link error message: ${message}, Location: ${locations}, Path: ${path}`);
+        });
     }
-};
+
+    if (networkError) {
+        console.log(`[Network error]: ${networkError}`);
+    }
+});
 
 const client = new ApolloClient({
     link: ApolloLink.from([
-        onError(onerrorClientLink()),
+        errorLink,
         csrfMiddleware,
         httpLink,
     ]),
     cache: new InMemoryCache(),
 });
-*/
-
 
 
 // Need to create ApolloClient directly from 'apollo-client' not 'apollo-boost'
 // to add custom links.
 // - https://www.apollographql.com/docs/react/migrating/boost-migration/
+/*
 const client = new ApolloClient({
     link: concat(csrfMiddleware, httpLink),
     cache: new InMemoryCache(),
 });
+*/
 
 
 export default client;
