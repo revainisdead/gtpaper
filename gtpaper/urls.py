@@ -18,18 +18,21 @@ from django.contrib import admin
 from django.conf.urls import url
 from django.urls import path
 
-from django.views.decorators.csrf import csrf_exempt
-
 from graphene_django.views import GraphQLView
 
+from gtpaper import views
+
+print(views.index)
 # XXX Ignore migration warning: URL name 'url' isn't unique:
 #
 # Since admin urls are checked before the catch all (last url),
 # this warning should be irrelevant.
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    path("graphql/", GraphQLView.as_view(graphiql=True)),
     # These two must be last.
-    url(r"^$", csrf_exempt(GraphQLView.as_view(graphiql=True))), # matches just an empty string
-    url(r"^(?:.*)/?", admin.site.urls), # matches all urls
+    # Not needed if the root matches the home page in the front end
+    url(r"^$", views.index), # matches the root
+    #url(r"^(?:.*)/?", views.index), # matches all urls
+    url(r"^.*$", views.index), # matches all urls
 ]

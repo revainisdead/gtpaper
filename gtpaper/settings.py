@@ -147,5 +147,6 @@ CSRF_COOKIE_SECURE = False # not https
 STATIC_URL = '/static/'
 
 # For Production this must have a value
-# STATIC_ROOT="..." # collectstatic drops files at this location
+settings_dir = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(settings_dir, "..", "static") # collectstatic drops files at this location
 
