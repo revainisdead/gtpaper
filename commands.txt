@@ -124,6 +124,14 @@ o) Can't load html because javascript isn't loaded
 o) Django cors middleware
     - `pip install django-cors-middleware`
 
+o) Fix returning html not json bug: add trailing slash
+
+
+o) Django Rest Framework
+    - `pip install djangorestframework`
+    - `django-admin startapp restful_api`
+
+
 
 To Do
 -----
@@ -134,3 +142,9 @@ o) Login
 o) Add csrf middleware
 
 o) Instead of using email to login, add google oauth api authentication
+
+o) Goolge oauth token
+    - https://console.developers.google.com/
+    - Set up google apis account
+    - Rename first project to GTPaper-Auth
+    - `pip install django-allauth`

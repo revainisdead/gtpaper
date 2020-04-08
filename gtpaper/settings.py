@@ -47,6 +47,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'gtpaper',
+    'restful_api',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +55,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'graphene_django',
-    'corsheaders',
 ]
 
 GRAPHENE = {
