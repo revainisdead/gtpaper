@@ -61,17 +61,16 @@ GRAPHENE = {
     "SCHEMA": "gtpaper.schema.schema",
 }
 
-#'corsheaders.middleware.CorsMiddleware',
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    #'gtpaper.middleware.allow_headers_middleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'gtpaper.middleware.allow_headers_middleware',
+    'gtpaper.middleware.auth_middleware',
 ]
 
 ROOT_URLCONF = 'gtpaper.urls'

@@ -17,10 +17,17 @@ from django.contrib import admin
 
 from django.conf.urls import url
 from django.urls import path
+from django.utils.decorators import decorator_from_middleware
 
 from graphene_django.views import GraphQLView
 
 from gtpaper import views
+from gtpaper.middleware import auth_middleware
+
+# Add header based authentication via tokens to graphql
+#auth_middleware_decorator = decorator_from_middleware(auth_middleware)
+#   path("graphql/", auth_middleware_decorator(GraphQLView.as_view(graphiql=True))),
+
 
 # XXX Ignore migration warning: URL name 'url' isn't unique:
 #
