@@ -5,11 +5,11 @@ import { onError } from "apollo-link-error";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
 import store from "../store/just_store.js";
-import { requestToken } from "../store/actions.js";
+import { getToken } from "../store/actions.js";
 
 
 function __getAuthToken() {
-    token = store.dispatch(requestToken);
+    const token = store.dispatch(getToken);
 
     return "Token: " + token;
 }

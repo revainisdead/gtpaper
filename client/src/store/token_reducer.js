@@ -1,17 +1,21 @@
 import { combineReducers } from 'redux';
 
-import { ADD_TOKEN, DELETE_TOKEN } from './actions.js';
+import { REQUEST_TOKEN, ADD_TOKEN, DELETE_TOKEN } from './actions.js';
 
 const initialState = {
     token: null,
 };
 
-function getToken(state = initialState, action) {
+function tokenReducer(state = initialState, action) {
     switch (action.type) {
+        case REQUEST_TOKEN:
+            return state;
+
         case ADD_TOKEN:
             return Object.assign({}, state, {
                 token: state.token,
             });
+
         case DELETE_TOKEN:
             const { token, ...reststate } = state;
             return {
@@ -24,6 +28,6 @@ function getToken(state = initialState, action) {
 }
 
 
-const tokenApp = combineReducers({ getToken });
+const tokenApp = combineReducers({ tokenReducer });
 
 export default tokenApp;

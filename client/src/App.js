@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import GlobalRoutes from "./global-routes";
 
-import client from "./net-header/header";
+import client from "./net/header";
 
 
 const App = (props) => {
@@ -38,5 +38,6 @@ const test = (props) => {
 }
 test()
 */
+
 
 export default App;

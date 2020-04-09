@@ -3,8 +3,14 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import { connect } from "react-redux";
+
+import { getToken } from "./store/actions.js";
+
+import Login from "./components/auth/login.jsx";
+
+
 const Home = (props) => {
-    console.log("In Home");
     return (
 
         <div className="App">
@@ -26,4 +32,14 @@ const Home = (props) => {
     );
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+    return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        token: () => dispatch(getToken),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

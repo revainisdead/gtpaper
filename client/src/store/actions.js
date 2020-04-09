@@ -3,8 +3,17 @@
 // There can only be one user logged in per client at a time.
 // Format username: token
 
+// XXX Add Username to redux too after in login form
+//
+export const REQUEST_TOKEN="REQUEST_TOKEN";
 export const ADD_TOKEN="ADD_TOKEN";
 export const DELETE_TOKEN="DELETE_TOKEN";
+
+export function getToken() {
+    return {
+        type: REQUEST_TOKEN,
+    }
+}
 
 export function addToken(token) {
     return {
@@ -19,6 +28,3 @@ export function deleteToken(token) {
         token,
     }
 }
-
-//const boundAddToken = (token) => dispatch(addToken(token));
-//const boundDeleteToken = (token) => dispatch(deleteToken(token));
