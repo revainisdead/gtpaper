@@ -37,6 +37,6 @@ const test = (props) => {
         .then(result => console.log("TEST", result));
 }
 
-test()
+//test()
 
 export default App;

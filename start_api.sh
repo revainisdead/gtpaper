@@ -7,7 +7,7 @@ cd "${0%/*}"
 
 # This env variable is accessed from django's settings.py as well.
 export GTPAPER_PROD=False
-py manage.py runserver 0.0.0.0:5000
+python3.8 manage.py runserver 0.0.0.0:5000
 
 # Prod
 # export GTPAPER_PROD=True
