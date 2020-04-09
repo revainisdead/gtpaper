@@ -47,7 +47,6 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'gtpaper',
-    'restful_api',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'graphene_django',
     'rest_framework',
+    'restful_api',
 ]
 
 GRAPHENE = {
@@ -153,4 +153,4 @@ CSRF_COOKIE_SECURE = False # not https
 STATIC_URL = '/static/'
 
 # For Production this must have a value
-STATIC_ROOT = os.path.join(BASE_DIR, "static") # collectstatic drops files at this location
+STATIC_ROOT = os.path.join(BASE_DIR, "static/") # collectstatic drops files at this location

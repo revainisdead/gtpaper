@@ -1,6 +1,5 @@
 Installation Documentation
 --------------------------
-
 o) Install PostgreSQL
     - Using PostgreSQL Version 12
     - Includes pgadmin
@@ -21,7 +20,6 @@ o) Install libraries
     - `(gtpaper-env) py -m pip3 install django`
     - djang-graphql
     - uwsgi
-    - nginx?
 
 o) Action item: Store licenses of libraries in folder
 
@@ -47,7 +45,7 @@ o) Run migrations
     - `py manage.py migrate`
 
 o) Add admin user
-    - `py manage.py createsuper`
+    - `py manage.py createsuperuser`
     - Username: admin
     - Password: life6565
 
@@ -130,6 +128,10 @@ o) Fix returning html not json bug: add trailing slash
 o) Django Rest Framework
     - `pip install djangorestframework`
     - `django-admin startapp restful_api`
+
+o) Forgot user was wrong...
+    - `curl -H "Accept:application/json" -H "X-CSRFToken:8pAteoCdhym3wGeRB3HYxls7H1udIa5qkh9p80dr8gnH1hK2TiL48H6ViVurTa2L" -u admin:life6565 http://127.0.0.1:5000/restful_api/users/`
+    - reponse: [{"url":"http://127.0.0.1:5000/restful_api/users/1/","username":"admin","email":"chris.ant.hall@gmail.com","groups":[]}]
 
 
 

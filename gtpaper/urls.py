@@ -15,14 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.urls import path
 from django.utils.decorators import decorator_from_middleware
 
 from graphene_django.views import GraphQLView
 
+from restful_api import urls
 from gtpaper import views
 from gtpaper.middleware import auth_middleware
+
 
 # Add header based authentication via tokens to graphql
 #auth_middleware_decorator = decorator_from_middleware(auth_middleware)
@@ -34,6 +36,7 @@ from gtpaper.middleware import auth_middleware
 # Since admin urls are checked before the catch all (last url),
 # this warning should be irrelevant.
 urlpatterns = [
+    url(r"^restful_api/", include(urls)),
     path("admin/", admin.site.urls),
     path("graphql/", GraphQLView.as_view(graphiql=True)),
     url(r"^$", views.index), # matches the root

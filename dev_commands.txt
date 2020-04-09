@@ -1,0 +1,22 @@
+`sudo mkdir gtpaper-linux`
+`sudo apt-get install python3.8`
+`python3.8`
+`sudo apt-get install python3-venv`
+`python3.8 -m venv .`
+`git clone https://github.com/revainisdead/gtpaper.git`
+`cd gtpaper`
+`pip3 install -r requirements.txt`
+`sudo apt-get install libpq-dev`
+`sudo apt install postgresql postgresql-contrib`
+`sudo su - postgres`
+`psql`
+`CREATE DATABASE gtpaper;`
+`CREATE USER gtpaper WITH PASSWORD 'gtpaper';`
+`GRANT ALL PRIVILEGES ON DATABASE gtpaper TO gtpaper;`
+`sudo apt-get install gcc`
+`pip3 install -r requirements.txt`
+`sudo apt-get install python-dev`
+`scp secret.key christian@192.168.10.129:~`
+`python3.8 manage.py migrate`
+`python3.8 manage.py createsuperuser`
+
