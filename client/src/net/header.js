@@ -1,12 +1,17 @@
-import ApolloClient from 'apollo-client';
+import ApolloClient from "apollo-client";
 import { HttpLink } from "apollo-link-http";
 import { ApolloLink } from "apollo-link";
 import { onError } from "apollo-link-error";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
+import store from "../store/just_store.js";
+import { requestToken } from "../store/actions.js";
+
 
 function __getAuthToken() {
-    return "Token: xxx";
+    token = store.dispatch(requestToken);
+
+    return "Token: " + token;
 }
 
 // Source: https://docs.djangoproject.com/en/3.0/ref/csrf/
