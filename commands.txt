@@ -118,10 +118,6 @@ o) Can't load html because javascript isn't loaded
     - Why is javascript not loaded: the static js bundle is missing
     - `py manage.py collectstatic`
 
-
-o) Django cors middleware
-    - `pip install django-cors-middleware`
-
 o) Fix returning html not json bug: add trailing slash
 
 
@@ -129,7 +125,7 @@ o) Django Rest Framework
     - `pip install djangorestframework`
     - `django-admin startapp restful_api`
 
-o) Forgot user was wrong...
+o) Forgot url was wrong, and also password...
     - `curl -H "Accept:application/json" -H "X-CSRFToken:8pAteoCdhym3wGeRB3HYxls7H1udIa5qkh9p80dr8gnH1hK2TiL48H6ViVurTa2L" -u admin:life6565 http://127.0.0.1:5000/restful_api/users/`
     - reponse: [{"url":"http://127.0.0.1:5000/restful_api/users/1/","username":"admin","email":"chris.ant.hall@gmail.com","groups":[]}]
 

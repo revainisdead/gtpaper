@@ -19,4 +19,24 @@
 `scp secret.key christian@192.168.10.129:~`
 `python3.8 manage.py migrate`
 `python3.8 manage.py createsuperuser`
+`git config --global user.name "Christian Hall"`
+`git config --global user.email "chris.ant.hall@gmail.com"`
+`sudo apt-get install nodejs`
+`sudo apt-get install npm`
+`npm install`
+`cd client`
+`curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh`
+`sudo bash nodesource_setup.sh`
+`nodejs --version`
+`npm --version`
+`sudo apt install -y nodejs`
+`nodejs --version`
+`npm --version`
+`npm install`
+`curl -H "Accept:application/json" -u admin:life6565 http://127.0.0.1:5000/restful_api/users/`
+`curl -H "Accept:application/json" -u admin:life6565test http://127.0.0.1:5000/restful_api/users/`
+`curl -v POST http://127.0.0.1/restful_api/token-auth/ -d '{"username": "admin", "password": "life6565"}' -H "Content-Type:application/json"
 
+
+`pip3 install uwsgi`
+`pip3 install django-oauth-toolkit`
