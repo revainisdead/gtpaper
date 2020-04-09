@@ -1,3 +1,8 @@
+from django.contrib.auth.models import User
+
+from rest_framework.authtoken.models import Token
+
+
 def allow_headers_middleware(get_response):
     def middleware(request):
         response = get_response(request)
@@ -22,7 +27,32 @@ def auth_middleware(get_response):
     def middleware(request):
         response = get_response(request)
 
-        print("In Auth Middleware")
+        try:
+            auth_header = response["Authorization"]
+        except Exception as e:
+            print("Authorization header not found. {}".format(e))
+            return
+
+        token = auth_header.split(" ")[1]
+
+        db_tokens = Token.objects.all()
+
+        print(token)
+        for db_token in db_tokens:
+            print(db_token)
+            print(db_token.token)
+            if db_token.token == token:
+                pk = db_token.id
+                print(pk)
+
+                user = User.objects.filter(id=pk)
+                print("TEST", user)
+
+        if user:
+            response.user = user
+        else:
+            #return render404
+            print('return 404')
 
         return response
     return middleware

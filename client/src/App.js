@@ -1,6 +1,6 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { gql } from "apollo-boost";
+//import { gql } from "apollo-boost";
 import { BrowserRouter } from "react-router-dom";
 
 import GlobalRoutes from "./global-routes";
@@ -18,7 +18,7 @@ const App = (props) => {
   );
 }
 
-
+/*
 const test = (props) => {
     client
         .query({
@@ -36,7 +36,7 @@ const test = (props) => {
         })
         .then(result => console.log("TEST", result));
 }
-
-//test()
+test()
+*/
 
 export default App;

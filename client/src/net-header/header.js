@@ -5,6 +5,10 @@ import { onError } from "apollo-link-error";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
 
+function __getAuthToken() {
+    return "Token: xxx";
+}
+
 // Source: https://docs.djangoproject.com/en/3.0/ref/csrf/
 function __getCookie(name) {
     var cookieValue = null;
@@ -43,6 +47,22 @@ function __getCookie(name) {
 
 const httpLink = new HttpLink({
     uri: "/graphql/",
+});
+
+
+const authMiddleware = new ApolloLink((operation, forward) => {
+    operation.setContext(() => {
+        return {
+            headers: {
+                "Authorization": __getAuthToken(),
+            },
+            fetchOptions: {
+                mode: "cors",
+            }
+        }
+    });
+
+    return forward(operation);
 });
 
 

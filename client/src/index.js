@@ -11,7 +11,7 @@ import store from "./store/just_store";
 
 // import react-bootstrap css
 
-
+// Not currently adding the header to other urls (non graphql) as I would expect
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 

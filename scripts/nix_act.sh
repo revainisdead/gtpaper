@@ -1,1 +1,3 @@
-source ../../bin/activate
+#!/bin/bash
+
+. /home/christian/gtpaper-linux/bin/activate
