@@ -1,0 +1,12 @@
+Comparing files httpd_backup.conf and HTTPD.CONF
+***** httpd_backup.conf
+
+#
+***** HTTPD.CONF
+
+# Christian's changes: GTPaper Web App, 4/8/2020
+WSGIScriptAlias /gtpaper C:\Users\Christian\Documents\binh\gtpaper-env\gtpaper\gtpaper\wsgi_test
+
+#
+*****
+

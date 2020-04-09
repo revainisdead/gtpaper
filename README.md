@@ -1,1 +1,2 @@
-Personal note: Start by activating Scripts\activate
+- pip install requirements.txt
+- activate virtual environment

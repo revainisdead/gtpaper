@@ -26,18 +26,16 @@ from django.http import HttpResponse
 
 from django.conf import settings
 
-file_dir = os.path.dirname(os.path.abspath(__file__))
-
-# This dir is local to the project.
-#if settings.DEBUG:
-#react_dir_index = os.path.join("../client/public/", "index.html")
-#else:
-react_dir_index = os.path.join(file_dir, "../client/build/", "index.html")
 
 def index(request):
+    # The client dir is local to the project.
+    if settings.DEBUG:
+        index_loc = os.path.join(settings.BASE_DIR, "client/build/", "index.html")
+    else:
+        index_loc = os.path.join(settings.STATIC_ROOT, "index.html")
+
     try:
-        with open(react_dir_index, "r") as f:
-            print("Found index.html")
+        with open(index_loc, "r") as f:
             return HttpResponse(f.read())
 
             #import json

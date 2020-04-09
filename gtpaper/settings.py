@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'graphene_django',
+    'rest_framework',
 ]
 
 GRAPHENE = {
@@ -143,14 +144,13 @@ CSRF_COOKIE_SECURE = False # not https
 # To extend default user model
 #AUTH_USER_MODEL = gtpaper.models.User
 
+# Overview of collectstatic:
+# Collects all files at STATIC_URL (/static/) which is defined by the webserver
+# and moves it into the location defined as STATIC_ROOT here (a strict location on the server)
+#
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
 STATIC_URL = '/static/'
 
 # For Production this must have a value
-settings_dir = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(settings_dir, "..", "static") # collectstatic drops files at this location
-
-#APPEND_SLASH = False
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static") # collectstatic drops files at this location

@@ -1,0 +1,18 @@
+Comparing files uwsgiconfig.py and UWSGICONFIG_BACKUP.PY
+***** uwsgiconfig.py
+import time
+import platform
+uwsgi_os = platform.uname()[0]
+uwsgi_os_k = re.split('[-+_]', platform.uname()[2])[0]
+uwsgi_os_v = platform.uname()[3]
+uwsgi_cpu = platform.uname()[4]
+
+***** UWSGICONFIG_BACKUP.PY
+import time
+uwsgi_os = os.uname()[0]
+uwsgi_os_k = re.split('[-+_]', os.uname()[2])[0]
+uwsgi_os_v = os.uname()[3]
+uwsgi_cpu = os.uname()[4]
+
+*****
+
