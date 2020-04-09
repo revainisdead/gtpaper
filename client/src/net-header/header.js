@@ -98,10 +98,15 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 // Need to create ApolloClient directly from 'apollo-client' not 'apollo-boost'
 // to add custom links.
 // - https://www.apollographql.com/docs/react/migrating/boost-migration/
+//
+// Think of it this way: httpLink has the final graphql endpoint, so the network chain
+// does down the list, so each item that occurs in the list does its work, and the
+// next chain the list has access to do that work done.
 const client = new ApolloClient({
     link: ApolloLink.from([
         errorLink,
         csrfMiddleware,
+        authMiddleware,
         httpLink,
     ]),
     cache: new InMemoryCache(),

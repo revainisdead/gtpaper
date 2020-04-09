@@ -11,9 +11,16 @@ import store from "./store/just_store";
 
 // import react-bootstrap css
 
+
 // Not currently adding the header to other urls (non graphql) as I would expect
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
+// Log initial state
+console.log(store.getState());
+
+// Subscribe to log on every store change
+const unsubscribe = store.subscribe(() => console.log(store.getState()));
 
 
 ReactDOM.render(
@@ -24,6 +31,8 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+unsubscribe()
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
