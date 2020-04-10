@@ -26,10 +26,11 @@ function requestPost(url, payload) {
 
 
 function fakeLogin() {
-    const url = "http://127.0.0.1:5000/restful_api/token-auth/";
+    //const url = "http://127.0.0.1:3000/restful_api/token-auth/";
+    const url = "/restful_api/token-auth/";
     const tempdata = {
-        "username": "christian",
-        "password": "a",
+        "username": "admin",
+        "password": "life6565",
     };
 
     let data = requestPost(url, tempdata);
