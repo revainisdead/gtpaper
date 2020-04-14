@@ -9,8 +9,9 @@ import { getToken } from "../store/actions.js";
 
 
 function __getAuthToken() {
-    const token = store.dispatch(getToken);
+    const token = store.dispatch(getToken());
 
+    console.log("in __getAuthToken: ", token);
     return "Token: " + token;
 }
 
@@ -55,20 +56,19 @@ const httpLink = new HttpLink({
 });
 
 
+/*
 const authMiddleware = new ApolloLink((operation, forward) => {
     operation.setContext(() => {
         return {
             headers: {
                 "Authorization": __getAuthToken(),
             },
-            fetchOptions: {
-                mode: "cors",
-            }
         }
     });
 
     return forward(operation);
 });
+*/
 
 
 const csrfMiddleware = new ApolloLink((operation, forward) => {
@@ -76,9 +76,11 @@ const csrfMiddleware = new ApolloLink((operation, forward) => {
         return {
             headers: {
                 "X-CSRFToken": __getCookie("csrftoken"),
+                "Authorization": __getAuthToken(),
             },
             fetchOptions: {
                 mode: "cors",
+                credentials: "include",
             }
         }
     });
@@ -111,7 +113,7 @@ const client = new ApolloClient({
     link: ApolloLink.from([
         errorLink,
         csrfMiddleware,
-        authMiddleware,
+        //authMiddleware,
         httpLink,
     ]),
     cache: new InMemoryCache(),

@@ -10,9 +10,11 @@ function requestPost(url, payload) {
         body: JSON.stringify(payload),
         headers: new Headers({
             "Content-Type": "application/json",
+            "credentials": "include",
         }),
+        credentials: "include",
     })
-    .then(response => {
+    .then((response) => {
         let data = response.json();
 
         return data["token"];
@@ -26,8 +28,7 @@ function requestPost(url, payload) {
 
 
 function fakeLogin() {
-    //const url = "http://127.0.0.1:3000/restful_api/token-auth/";
-    const url = "/restful_api/token-auth/";
+    const url = "http://192.168.10.129:3000/api/token-auth/";
     const tempdata = {
         "username": "admin",
         "password": "life6565",
@@ -35,8 +36,6 @@ function fakeLogin() {
 
     let data = requestPost(url, tempdata);
     let token = data["token"];
-
-    console.log("TOKEN", token);
 
     return token;
 }
@@ -67,4 +66,5 @@ const mapDispatchToProps = (dispatch) => {
 
 // Okay but how to map props to dispatch? (addToken(token)?)
 
+console.log(Login);
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -33,12 +34,15 @@ SECRET_KEY = get_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 PROD = os.environ.get("GTPAPER_PROD", False)
-if PROD:
-    print("In Production")
-    DEBUG = False
-else:
-    print("In Development")
-    DEBUG = True
+#print("WTFPROD", PROD)
+#if PROD:
+    #print("In Production")
+    #DEBUG = False
+#else:
+    #print("In Development")
+    #DEBUG = True
+
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -47,6 +51,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'gtpaper',
+    'restful_api',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,7 +61,6 @@ INSTALLED_APPS = [
     'graphene_django',
     'rest_framework',
     'rest_framework.authtoken',
-    'restful_api',
 ]
 
 GRAPHENE = {
@@ -155,3 +159,22 @@ STATIC_URL = '/static/'
 
 # For Production this must have a value
 STATIC_ROOT = os.path.join(BASE_DIR, "static/") # collectstatic drops files at this location
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",
+    ],
+    "DEFAULT_PARSER_CLASSES": [
+        "rest_framework.parsers.JSONParser",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+        #"rest_framework.authentication.BasicAuthentication",
+        #"restful_api.authentication.CsrfExemptSessionAuth",
+    ],
+}

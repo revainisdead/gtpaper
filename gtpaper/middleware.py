@@ -12,11 +12,14 @@ def allow_headers_middleware(get_response):
         # access allow headers are not needed because the back end
         # and front end are of the same origin, but if I use an external
         # api, these headers will come in handy, see keep them in.
+        #
+        # if ui.fetchOptions.cors: use this
+        # else ui.fetchOptions.no-cors: not needed
         access_control_allow = "Access-Control-Allow"
         response[access_control_allow + "-Origin"] = "*" # replace with external url
-        response[access_control_allow + "-Methods"] = "GET, POST, PUT, PATCH, OPTIONS, DELETE, HEAD"
+        response[access_control_allow + "-Methods"] = "GET, POST, PUT, PATCH, OPTIONS, DELETE, HEAD" # options here allow preflight requests
         response[access_control_allow + "-Headers"] = "Content-Type, X-CSRFToken, Origin, Authorization, User-Agent, x-requested-with, accept"
-        # Permits the client to attach cookies to its requests
+        # Permits the client to attach cookies to its requests, use with fetch option "credentials": "include"
         response[access_control_allow + "-Credentials"] = "true"
 
         return response
@@ -27,21 +30,32 @@ def auth_middleware(get_response):
     def middleware(request):
         response = get_response(request)
 
+        # Debug
+        #print("AAAA", { k: v for k, v in request.META.items() if k.startswith("HTTP_") })
+
         try:
-            auth_header = response["Authorization"]
+            auth_header = request.META["HTTP_AUTHORIZATION"]
+
         except Exception as e:
             print("Authorization header not found. {}".format(e))
-            return
+            # XXX !!!!!!!!!!!!!
+            return response
 
         token = auth_header.split(" ")[1]
 
         db_tokens = Token.objects.all()
 
-        print(token)
-        for db_token in db_tokens:
-            print(db_token)
-            print(db_token.token)
-            if db_token.token == token:
+
+        print('auth_header', auth_header)
+        print('token', token)
+        print('type of token', type(token))
+
+        user = None
+        print("DEBUG: Token from front end {}".format(token))
+        for token_obj in db_tokens:
+            print(token_obj)
+            print(token_obj.key)
+            if token_obj.key == token:
                 pk = db_token.id
                 print(pk)
 

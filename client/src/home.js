@@ -38,7 +38,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        token: () => dispatch(getToken),
+        token: () => dispatch(getToken()),
     };
 };
 

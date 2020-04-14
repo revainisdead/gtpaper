@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.conf.urls import url, include
 from django.urls import path
 from django.utils.decorators import decorator_from_middleware
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from graphene_django.views import GraphQLView
 
@@ -36,9 +37,9 @@ from gtpaper.middleware import auth_middleware
 # Since admin urls are checked before the catch all (last url),
 # this warning should be irrelevant.
 urlpatterns = [
-    url(r"^restful_api/", include(urls)),
+    url(r"^api/", include(urls)),
     path("admin/", admin.site.urls),
-    path("graphql/", GraphQLView.as_view(graphiql=True)),
+    path("graphql/", ensure_csrf_cookie(GraphQLView.as_view(graphiql=True))),
     url(r"^$", views.index), # matches the root
     url(r"^.*$", views.index), # matches all urls
 ]
