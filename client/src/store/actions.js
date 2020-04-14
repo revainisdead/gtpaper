@@ -1,10 +1,10 @@
 
 
 // There can only be one user logged in per client at a time.
-// Format username: token
 
-// XXX Add Username to redux too after in login form
-//
+// XXX Add Username to redux too after on successful login
+
+
 export const REQUEST_TOKEN="REQUEST_TOKEN";
 export const ADD_TOKEN="ADD_TOKEN";
 export const DELETE_TOKEN="DELETE_TOKEN";

@@ -75,7 +75,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'gtpaper.middleware.allow_headers_middleware',
+    'gtpaper.middleware.cors_headers_middleware',
     'gtpaper.middleware.auth_middleware',
 ]
 

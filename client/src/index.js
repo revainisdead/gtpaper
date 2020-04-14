@@ -4,12 +4,10 @@ import { Provider } from "react-redux";
 import axios from "axios";
 
 import './index.css';
-import App from './App';
+import App from './app.js';
 //import * as serviceWorker from './serviceWorker';
 
 import store from "./store/just_store";
-
-// import react-bootstrap css
 
 
 // Not currently adding the header to other urls (non graphql) as I would expect

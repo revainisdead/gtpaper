@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { addToken, getToken } from "../../store/actions.js";
+import { addToken } from "../../store/actions.js";
 
 
 function requestPost(url, payload) {
@@ -41,12 +41,15 @@ function fakeLogin() {
 }
 
 
-fakeLogin()
+//let token = fakeLogin()
 
 
 
 function Login({ props }) {
     //{ token } = props;
+
+    let token = fakeLogin();
+    props.addToken(token);
 
     return (
         <div>
@@ -61,7 +64,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {};
+    return {
+        addToken: (token) => dispatch(addToken()),
+    };
 };
 
 // Okay but how to map props to dispatch? (addToken(token)?)

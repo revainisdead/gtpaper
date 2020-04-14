@@ -3,24 +3,24 @@ from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 
 
-def allow_headers_middleware(get_response):
+def cors_headers_middleware(get_response):
+    """
+    Headers to include in the server's reponse to enable CORS.
+
+    origin: Note that localhost is not allowed by chrome as a value for "Access-Control-Allow-Origin"
+    methods: OPTIONS here allows pre-flight requests
+    headers: Client must include one of these
+    credentials: Permits the client to attach cookies to its requests, use with fetch option "credentials": "include"
+
+    """
     def middleware(request):
         response = get_response(request)
 
-        # Note: to prove a point, I could comment this stuff out,
-        # because it's not being used. Currently, these cors
-        # access allow headers are not needed because the back end
-        # and front end are of the same origin, but if I use an external
-        # api, these headers will come in handy, see keep them in.
-        #
-        # if ui.fetchOptions.cors: use this
-        # else ui.fetchOptions.no-cors: not needed
-        access_control_allow = "Access-Control-Allow"
-        response[access_control_allow + "-Origin"] = "*" # replace with external url
-        response[access_control_allow + "-Methods"] = "GET, POST, PUT, PATCH, OPTIONS, DELETE, HEAD" # options here allow preflight requests
-        response[access_control_allow + "-Headers"] = "Content-Type, X-CSRFToken, Origin, Authorization, User-Agent, x-requested-with, accept"
-        # Permits the client to attach cookies to its requests, use with fetch option "credentials": "include"
-        response[access_control_allow + "-Credentials"] = "true"
+        # If cors is enabled (see fetchOptions in client), these headers are needed.
+        response["Access-Control-Allow-Origin"] = "*" # replace with external url
+        response["Access-Control-Allow-Methods"] = "GET, POST, PUT, PATCH, OPTIONS, DELETE, HEAD"
+        response["Access-Control-Allow-Headers"] = "Content-Type, X-CSRFToken, Origin, Authorization, User-Agent, x-requested-with, accept"
+        response["Access-Control-Allow-Credentials"] = "true"
 
         return response
     return middleware

@@ -1,21 +1,17 @@
 import React from 'react';
-
-import logo from './logo.svg';
-import './App.css';
-
 import { connect } from "react-redux";
 
-import { getToken } from "./store/actions.js";
+import { getToken } from "../../store/actions.js";
+import Login from "../auth/login.jsx";
 
-import Login from "./components/auth/login.jsx";
+import './home.css';
 
 
 const Home = (props) => {
-    return (
 
+    return (
         <div className="App">
           <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
             <p>
               Edit <code>src/App.js</code> and save to reload.
             </p>
@@ -27,6 +23,7 @@ const Home = (props) => {
             >
               Learn React
             </a>
+            <Login />
           </header>
         </div>
     );
@@ -36,9 +33,10 @@ const mapStateToProps = (state) => {
     return {};
 };
 
+// to dispatch call: props.getToken(token_value)
 const mapDispatchToProps = (dispatch) => {
     return {
-        token: () => dispatch(getToken()),
+        getToken: () => dispatch(getToken()),
     };
 };
 

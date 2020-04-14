@@ -18,8 +18,7 @@ const App = (props) => {
   );
 }
 
-/*
-*/
+
 const test = (props) => {
     client
         .query({
