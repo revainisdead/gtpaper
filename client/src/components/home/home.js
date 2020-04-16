@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 
-import { getToken } from "../../store/actions.js";
+import { requestToken } from "../../store/actions.js";
 import Login from "../auth/login.jsx";
 
 import './home.css';
@@ -13,8 +13,11 @@ const Home = (props) => {
         <div className="App">
           <header className="App-header">
             <p>
-              Edit <code>src/App.js</code> and save to reload.
+                Login to GTPaper
             </p>
+
+            <Login />
+
             <a
               className="App-link"
               href="https://reactjs.org"
@@ -23,7 +26,6 @@ const Home = (props) => {
             >
               Learn React
             </a>
-            <Login />
           </header>
         </div>
     );
@@ -36,7 +38,7 @@ const mapStateToProps = (state) => {
 // to dispatch call: props.getToken(token_value)
 const mapDispatchToProps = (dispatch) => {
     return {
-        getToken: () => dispatch(getToken()),
+        requestToken: () => dispatch(requestToken()),
     };
 };
 

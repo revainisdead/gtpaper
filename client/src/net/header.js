@@ -5,13 +5,16 @@ import { onError } from "apollo-link-error";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
 import store from "../store/just_store.js";
-import { getToken } from "../store/actions.js";
 
 
 function __getAuthToken() {
-    const token = store.dispatch(getToken());
+    //const token = store.dispatch(fetchToken());
 
-    console.log("in __getAuthToken: ", token);
+    const state = store.getState();
+
+    const token = state.reducers.tokenReducer.tokenReducer.token;
+
+    console.log("in get auth token: ", token);
     return "Token: " + token;
 }
 
@@ -32,11 +35,20 @@ function __getCookie(name) {
     return cookieValue;
 }
 
+/*
+const Token = (props) => {
+    props.
 
-// XXX
-// 
-// Need trailing slash, without which, will cause hidden
-// bugs for a long time and will never load json.
+    return (
+        <></>
+    );
+};
+
+tokenApp = connect(mapStateToProps, mapDispatchToProps)(Token);
+*/
+
+
+// Need trailing slash, without which, will never load json.
 // The response will always be html.
 //
 // The problem is that I am spoiled from using django, it has a setting
@@ -56,22 +68,10 @@ const httpLink = new HttpLink({
 });
 
 
-/*
-const authMiddleware = new ApolloLink((operation, forward) => {
-    operation.setContext(() => {
-        return {
-            headers: {
-                "Authorization": __getAuthToken(),
-            },
-        }
-    });
-
-    return forward(operation);
-});
-*/
 
 
-const csrfMiddleware = new ApolloLink((operation, forward) => {
+
+const csrfAndAuthMiddleware = new ApolloLink((operation, forward) => {
     operation.setContext(() => {
         return {
             headers: {
@@ -112,8 +112,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 const client = new ApolloClient({
     link: ApolloLink.from([
         errorLink,
-        csrfMiddleware,
-        //authMiddleware,
+        csrfAndAuthMiddleware,
         httpLink,
     ]),
     cache: new InMemoryCache(),

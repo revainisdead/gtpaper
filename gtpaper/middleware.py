@@ -38,35 +38,38 @@ def auth_middleware(get_response):
 
         except Exception as e:
             print("Authorization header not found. {}".format(e))
-            # XXX !!!!!!!!!!!!!
+
+            # XXX This line solved a previous problem when the header is not found.
             return response
 
         token = auth_header.split(" ")[1]
 
         db_tokens = Token.objects.all()
 
-
-        print('auth_header', auth_header)
-        print('token', token)
-        print('type of token', type(token))
-
         user = None
         print("DEBUG: Token from front end {}".format(token))
         for token_obj in db_tokens:
-            print(token_obj)
-            print(token_obj.key)
             if token_obj.key == token:
-                pk = db_token.id
-                print(pk)
+                pk = token_obj.user_id
 
-                user = User.objects.filter(id=pk)
-                print("TEST", user)
+                user = User.objects.filter(id=pk)[0]
 
         if user:
+            # Yes, authenticated users have their Django user added into the response
+            # for views. How this affects the project depends, currently the project
+            # uses mainly react router for routing, so it routes urls in the front
+            # end, so authentication for those urls needs to happen there. This is for
+            # server side urls, which there is not many of, but there is as of writing:
+            # 1. graphql
+            # 2. api urls
+            # 3. django admin
+
             response.user = user
+            print("DEBUG: User authenticated --> {}".format(user.username))
         else:
-            #return render404
-            print('return 404')
+            # Permission denied.
+            # Token from client does not match the token associated with the user in the database.
+            print('render 403 forbidden page')
 
         return response
     return middleware

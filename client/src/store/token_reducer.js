@@ -1,19 +1,29 @@
 import { combineReducers } from 'redux';
 
-import { REQUEST_TOKEN, ADD_TOKEN, DELETE_TOKEN } from './actions.js';
+import { GET_TOKEN, REQUEST_TOKEN, RECEIVE_TOKEN, DELETE_TOKEN } from './actions.js';
+
 
 const initialState = {
     token: null,
+    isFetching: false,
 };
+
 
 function tokenReducer(state = initialState, action) {
     switch (action.type) {
-        case REQUEST_TOKEN:
+        case GET_TOKEN:
             return state;
 
-        case ADD_TOKEN:
+        case REQUEST_TOKEN:
             return Object.assign({}, state, {
-                token: state.token,
+                isFetching: true,
+            });
+
+        case RECEIVE_TOKEN:
+            return Object.assign({}, state, {
+                token: action.token,
+                isFetching: false,
+                lastUpdated: action.receivedAt,
             });
 
         case DELETE_TOKEN:

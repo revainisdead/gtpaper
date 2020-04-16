@@ -1,11 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { addToken } from "../../store/actions.js";
+import { receiveToken, fetchToken } from "../../store/actions.js";
 
 
-function requestPost(url, payload) {
-    let data = fetch(url, {
+
+
+export function fakeAsyncLogin(dispatch) {
+    const url = "http://192.168.10.129:3000/api/token-auth/";
+    const payload = {
+        "username": "admin",
+        "password": "life6565",
+    };
+
+    return fetch(url, {
         method: "POST",
         body: JSON.stringify(payload),
         headers: new Headers({
@@ -17,39 +25,40 @@ function requestPost(url, payload) {
     .then((response) => {
         let data = response.json();
 
-        return data["token"];
+        console.log("TESTING", data);
+        return data;
+    })
+    .then((data) => {
+        let token = data["token"];
+        console.log("TOKEN IN FETCH", token);
+
+        return dispatch(receiveToken(token));
     })
     .catch(error => {
         console.error("Error retrieving auth token from restful api", error);
     });
 
-    return data;
+
+    //let data = requestPost(url, tempdata);
+    //let token = data["token"];
+    //return token;
+
+    //let token = data["token"];
+    //console.log("TESTING2", token);
 }
 
 
-function fakeLogin() {
-    const url = "http://192.168.10.129:3000/api/token-auth/";
-    const tempdata = {
-        "username": "admin",
-        "password": "life6565",
-    };
-
-    let data = requestPost(url, tempdata);
-    let token = data["token"];
-
-    return token;
-}
-
-
-//let token = fakeLogin()
-
-
-
-function Login({ props }) {
+function Login(props) {
     //{ token } = props;
 
-    let token = fakeLogin();
-    props.addToken(token);
+    //let token = fakeAsyncLogin();
+
+    // Must wait for fakeLogin to finish, use redux-thunk
+    //let tokenPromise = props.receiveToken(token);
+    //props.receiveToken();
+
+    let token = props.fetchToken();
+    console.log("FINAL TOKEN", token);
 
     return (
         <div>
@@ -58,18 +67,16 @@ function Login({ props }) {
     );
 }
 
-
 const mapStateToProps = (state) => {
     return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToken: (token) => dispatch(addToken()),
+        //receiveToken: (token) => dispatch(receiveToken(token)),
+        fetchToken: () => dispatch(fetchToken()),
+        dispatch,
     };
 };
 
-// Okay but how to map props to dispatch? (addToken(token)?)
-
-console.log(Login);
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
