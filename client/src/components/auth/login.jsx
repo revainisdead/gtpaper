@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { receiveToken, fetchToken } from "../../store/actions.js";
 
-
+import Token from "../../net/token.js";
 
 
 export function fakeAsyncLogin(dispatch) {
@@ -18,51 +18,57 @@ export function fakeAsyncLogin(dispatch) {
         body: JSON.stringify(payload),
         headers: new Headers({
             "Content-Type": "application/json",
-            "credentials": "include",
         }),
         credentials: "include",
     })
     .then((response) => {
         let data = response.json();
 
-        console.log("TESTING", data);
         return data;
     })
     .then((data) => {
         let token = data["token"];
-        console.log("TOKEN IN FETCH", token);
 
         return dispatch(receiveToken(token));
     })
     .catch(error => {
         console.error("Error retrieving auth token from restful api", error);
     });
-
-
-    //let data = requestPost(url, tempdata);
-    //let token = data["token"];
-    //return token;
-
-    //let token = data["token"];
-    //console.log("TESTING2", token);
 }
 
 
 function Login(props) {
     //{ token } = props;
 
-    //let token = fakeAsyncLogin();
+    /*
+    const test = (props) => {
+        client
+            .query({
+                query: gql`
+                    query {
+                        users {
+                            id
+                            username
+                            firstName
+                            lastName
+                            email
+                        }
+                    }
+                `,
+            })
+            .then(result => console.log("graphql test", result));
+    }
+    test()
+    */
 
     // Must wait for fakeLogin to finish, use redux-thunk
-    //let tokenPromise = props.receiveToken(token);
-    //props.receiveToken();
-
-    let token = props.fetchToken();
-    console.log("FINAL TOKEN", token);
+    props.fetchToken();
 
     return (
         <div>
-            "Test login"
+            <p>"Test login"</p>
+
+            <Token />
         </div>
     );
 }
@@ -73,7 +79,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        //receiveToken: (token) => dispatch(receiveToken(token)),
         fetchToken: () => dispatch(fetchToken()),
         dispatch,
     };

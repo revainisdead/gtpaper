@@ -1,17 +1,17 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import thunkMiddleware from 'redux-thunk';
 
 import reducers from './reducers.js';
 
 
-const rootreducer = combineReducers({
-    reducers,
-});
-
+// createStore takes only 2 arguments, use compose to pass redux devtools extension
 const store = createStore(
-    rootreducer,
-    applyMiddleware(
-        thunkMiddleware,
+    reducers,
+    compose(
+        applyMiddleware(
+            thunkMiddleware,
+        ),
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     ),
 );
 

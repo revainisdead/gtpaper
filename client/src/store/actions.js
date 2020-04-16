@@ -1,13 +1,6 @@
 // XXX Add Username to redux too after on successful login
 import { fakeAsyncLogin } from '../components/auth/login';
 
-// Get token from store
-export const GET_TOKEN="GET_TOKEN";
-export function getToken() {
-    return {
-        type: REQUEST_TOKEN,
-    }
-}
 
 // Stating that an async call is about to fetch the token
 export const REQUEST_TOKEN="REQUEST_TOKEN";

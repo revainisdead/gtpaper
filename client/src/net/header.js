@@ -4,19 +4,33 @@ import { ApolloLink } from "apollo-link";
 import { onError } from "apollo-link-error";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
+import { fetchToken, getToken } from '../store/actions';
+
 import store from "../store/just_store.js";
 
+/*
+// For convenience, we returned a promise from the dispatch function
+// so we can resolve it here separately and get the value.
+const token = store.dispatch(fetchToken()).then((tokenAction) => {
 
-function __getAuthToken() {
-    //const token = store.dispatch(fetchToken());
+    // This returns the tokenAction
+    console.log(tokenAction);
+    console.log("token action token", tokenAction.token);
+});
+*/
 
-    const state = store.getState();
 
-    const token = state.reducers.tokenReducer.tokenReducer.token;
+const getAuthToken = () => {
+    // Doesn't work because token is added asynchronously and this gets called before its set.
+    //
+    // get token from tokenApp somehow
+    //const state = store.getState();
+    //const token = state.tokenReducer.token;
 
-    console.log("in get auth token: ", token);
+    const token = "TEMP";
     return "Token: " + token;
 }
+
 
 // Source: https://docs.djangoproject.com/en/3.0/ref/csrf/
 function __getCookie(name) {
@@ -35,17 +49,6 @@ function __getCookie(name) {
     return cookieValue;
 }
 
-/*
-const Token = (props) => {
-    props.
-
-    return (
-        <></>
-    );
-};
-
-tokenApp = connect(mapStateToProps, mapDispatchToProps)(Token);
-*/
 
 
 // Need trailing slash, without which, will never load json.
@@ -76,7 +79,7 @@ const csrfAndAuthMiddleware = new ApolloLink((operation, forward) => {
         return {
             headers: {
                 "X-CSRFToken": __getCookie("csrftoken"),
-                "Authorization": __getAuthToken(),
+                "Authorization": getAuthToken(),
             },
             fetchOptions: {
                 mode: "cors",
@@ -118,5 +121,9 @@ const client = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
+
+//exports.getAuthToken = getAuthToken;
+//exports.client = client;
+//export default { getAuthToken, client };
 
 export default client;
