@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux';
-
 import { REQUEST_TOKEN, RECEIVE_TOKEN, DELETE_TOKEN } from './actions.js';
 
 

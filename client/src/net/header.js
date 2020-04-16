@@ -4,10 +4,6 @@ import { ApolloLink } from "apollo-link";
 import { onError } from "apollo-link-error";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
-import { fetchToken, getToken } from '../store/actions';
-
-import store from "../store/just_store.js";
-
 /*
 // For convenience, we returned a promise from the dispatch function
 // so we can resolve it here separately and get the value.

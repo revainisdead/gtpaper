@@ -45,6 +45,8 @@ const Token = (props) => {
     // before they can make a request to graphql for data.
     if (loading) {
         // render loading
+    } else if (error) {
+        // error
     } else {
         // render component
     }

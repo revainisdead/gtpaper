@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+//import { gql } from "apollo-boost";
 
 import { receiveToken, fetchToken } from "../../store/actions.js";
 
