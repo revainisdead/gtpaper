@@ -11,22 +11,27 @@ const Home = (props) => {
 
     return (
         <div className="App">
-          <header className="App-header">
-            <p>
-                Login to GTPaper
-            </p>
+            <header className="App-header">
+                <p class="app-label">
+                    Greater Than Paper
+                </p>
 
+                <p class="login-label">
+                    Login
+                </p>
+
+                {/*
+                <a
+                  className="App-link"
+                  href="https://reactjs.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Learn React
+                </a>
+                */}
+            </header>
             <Login />
-
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
         </div>
     );
 }

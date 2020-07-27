@@ -4,6 +4,8 @@ import { ApolloLink } from "apollo-link";
 import { onError } from "apollo-link-error";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
+import store from "../store/just_store";
+
 /*
 // For convenience, we returned a promise from the dispatch function
 // so we can resolve it here separately and get the value.
@@ -18,12 +20,19 @@ const token = store.dispatch(fetchToken()).then((tokenAction) => {
 
 const getAuthToken = () => {
     // Doesn't work because token is added asynchronously and this gets called before its set.
-    //
-    // get token from tokenApp somehow
-    //const state = store.getState();
-    //const token = state.tokenReducer.token;
+    // Not sure how to fix it yet, use a setTimeout for now.
+    const getTokenInner = () => {
+        const state = store.getState();
+        const token = state.tokenReducer.token;
 
-    const token = "TEMP";
+        return token;
+    };
+
+
+    // Solve this with a promise somehow
+    const token = setTimeout(getTokenInner, 3000);
+    //const token = "TEMP";
+
     return "Token: " + token;
 }
 

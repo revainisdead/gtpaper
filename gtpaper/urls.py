@@ -40,6 +40,13 @@ urlpatterns = [
     url(r"^api/", include(urls)),
     path("admin/", admin.site.urls),
     path("graphql/", ensure_csrf_cookie(GraphQLView.as_view(graphiql=True))),
-    url(r"^$", views.index), # matches the root
-    url(r"^.*$", views.index), # matches all urls
+
+
+
+
+    #url(r"^$", views.index), # matches the root
+
+    # Don't need this (yet). Since we are loading /build/index.html
+    # in the main django view, we need front end routing (react-router).
+    #url(r"^.*$", views.index), # matches all urls
 ]

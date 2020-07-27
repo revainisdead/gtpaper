@@ -2,9 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 //import { gql } from "apollo-boost";
 
+import "./login.css";
+
 import { receiveToken, fetchToken } from "../../store/actions.js";
 
 import Token from "../../net/token.js";
+
+
+// UI
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
 
 
 export function fakeAsyncLogin(dispatch) {
@@ -66,11 +74,24 @@ function Login(props) {
     props.fetchToken();
 
     return (
-        <div>
-            <p>"Test login"</p>
+        <Card>
+            <Card.Body>
+                <Form>
+                    <Form.Group controlId="formUsername">
+                        <Form.Control placeholder="Username"></Form.Control>
+                    </Form.Group>
 
-            <Token />
-        </div>
+                    <Form.Group controlId="formPassword">
+                        <Form.Control type="password" placeholder="Password"></Form.Control>
+                    </Form.Group>
+                </Form>
+
+                <Button>
+                    Login
+                </Button>
+                <Token />
+            </Card.Body>
+        </Card>
     );
 }
 

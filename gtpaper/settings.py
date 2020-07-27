@@ -34,7 +34,6 @@ SECRET_KEY = get_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 PROD = os.environ.get("GTPAPER_PROD", False)
-#print("WTFPROD", PROD)
 #if PROD:
     #print("In Production")
     #DEBUG = False

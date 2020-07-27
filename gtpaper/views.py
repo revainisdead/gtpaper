@@ -27,6 +27,7 @@ from django.http import HttpResponse
 from django.conf import settings
 
 
+"""
 def index(request):
     # The client dir is local to the project.
     if settings.DEBUG:
@@ -45,4 +46,5 @@ def index(request):
 
 
     except FileNotFoundError:
-        return HttpResponse("Can't load index.html from {}".format(react_dir_index, status=501))
+        return HttpResponse("Can't load index.html from {}".format(index_loc, status=501))
+"""

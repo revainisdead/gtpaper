@@ -42,6 +42,7 @@ def auth_middleware(get_response):
             # XXX This line solved a previous problem when the header is not found.
             return response
 
+        print("original Auth header: {}".format(auth_header))
         token = auth_header.split(" ")[1]
 
         db_tokens = Token.objects.all()

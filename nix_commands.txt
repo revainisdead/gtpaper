@@ -35,8 +35,14 @@
 `npm install`
 `curl -H "Accept:application/json" -u admin:life6565 http://127.0.0.1:5000/restful_api/users/`
 `curl -H "Accept:application/json" -u admin:life6565test http://127.0.0.1:5000/restful_api/users/`
-`curl -v POST http://127.0.0.1/restful_api/token-auth/ -d '{"username": "admin", "password": "life6565"}' -H "Content-Type:application/json"
+`curl -v POST http://127.0.0.1/restful_api/token-auth/ -d '{"username": "admin", "password": "life6565"}' -H "Content-Type:application/json"`
 
 
 `pip3 install uwsgi`
 `pip3 install django-oauth-toolkit`
+
+`chmod 755 start_api.sh`
+`./start_api.sh`
+
+`npm install react-bootstrap bootstrap`
+

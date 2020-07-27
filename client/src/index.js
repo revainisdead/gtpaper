@@ -6,8 +6,8 @@ import './index.css';
 import App from './app.js';
 import * as serviceWorker from './serviceWorker';
 
+import "bootstrap/dist/css/bootstrap.min.css";
 
-// Not currently adding the header to other urls (non graphql) as I would expect
 //axios.defaults.xsrfCookieName = "csrftoken";
 //axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
