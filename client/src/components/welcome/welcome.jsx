@@ -4,11 +4,10 @@ import { connect } from "react-redux";
 import { requestToken } from "../../store/actions.js";
 import Login from "../auth/login.jsx";
 
-import './home.css';
+import './welcome.css';
 
 
-const Home = (props) => {
-
+const Welcome = (props) => {
     return (
         <div className="App">
             <header className="App-header">
@@ -47,4 +46,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Welcome);
