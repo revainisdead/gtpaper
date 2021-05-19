@@ -1,14 +1,19 @@
+/*
+ * .class1 .class2 --> Applies to class2 element that is inside class1
+ * .class2.class2  --> Element has both classes; class="class2 class2"
+ * .class2, class2 --> Apply css rules to multiple classes
+ */
+
 .App {
   text-align: center;
 }
 
+/*
 @media (prefers-reduced-motion: no-preference) {
   .spinner {
     animation: spin-effect infinite 20s linear;
   }
 }
-
-
 @keyframes spin-effect {
   from {
     transform: rotate(0deg);
@@ -17,6 +22,7 @@
     transform: rotate(360deg);
   }
 }
+*/
 
 .App-header {
     background-color: #282c34;

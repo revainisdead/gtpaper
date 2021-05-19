@@ -25,6 +25,7 @@ const getAuthToken = () => {
         const state = store.getState();
         const token = state.tokenReducer.token;
 
+        console.log(token);
         return token;
     };
 
@@ -33,7 +34,8 @@ const getAuthToken = () => {
     const token = setTimeout(getTokenInner, 3000);
     //const token = "TEMP";
 
-    return "Token: " + token;
+    console.log("token test in JS header", token)
+    return "Token " + token;
 }
 
 
@@ -76,10 +78,11 @@ const httpLink = new HttpLink({
 });
 
 
-
-
-
+// Notes:
+// Authorization -> HTTP_AUTHORIZATION?
+// Should not need cors mode, since it is actually on the same origin
 const csrfAndAuthMiddleware = new ApolloLink((operation, forward) => {
+    console.log("cookie test", __getCookie("csrftoken"));
     operation.setContext(() => {
         return {
             headers: {
@@ -115,8 +118,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 // - https://www.apollographql.com/docs/react/migrating/boost-migration/
 //
 // Think of it this way: httpLink has the final graphql endpoint, so the network chain
-// does down the list, so each item that occurs in the list does its work, and the
-// next chain the list has access to do that work done.
+// goes down the list, so each item that occurs in the list does its work, and the
+// next chain the list has access to that work done.
 const client = new ApolloClient({
     link: ApolloLink.from([
         errorLink,

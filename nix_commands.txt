@@ -33,9 +33,10 @@
 `nodejs --version`
 `npm --version`
 `npm install`
-`curl -H "Accept:application/json" -u admin:life6565 http://127.0.0.1:5000/restful_api/users/`
-`curl -H "Accept:application/json" -u admin:life6565test http://127.0.0.1:5000/restful_api/users/`
-`curl -v POST http://127.0.0.1/restful_api/token-auth/ -d '{"username": "admin", "password": "life6565"}' -H "Content-Type:application/json"`
+[IDK]`curl -H "Accept:application/json" -u admin:life6565 http://127.0.0.1:5000/restful_api/users/`
+[IDK]`curl -H "Accept:application/json" -u admin:life6565test http://127.0.0.1:5000/restful_api/users/`
+`curl -X GET http://127.0.0.1:5000/api/users -H Authorization: Token a463ea04730b85bb5e5057cbdc24990b5a695955`
+[WORKS]`curl -v -X POST http://127.0.0.1:5000/api/token-auth/ -d {"username": "admin", "password": "life6565"} -H Content-Type:application/json > test_token.txt`
 
 
 `pip3 install uwsgi`
@@ -46,3 +47,23 @@
 
 `npm install react-bootstrap bootstrap`
 
+`ifconfig -a`
+# Add interface info to /etc/network/interfaces:
+"""
+auto enp0s3
+iface enp0s3 inet dhcp
+"""
+# Add interface info to /etc/netplan/50-cloud-init.yaml:
+"""
+network:
+    ethernets:
+        enp0s3:
+            dhcp: true
+        enp0s8:
+            dhcp: true
+    version: 2
+"""
+# For /etc/network/interfaces, restart with:
+`sudo service networking restart`
+# For /etc/netplan/50-cloud-init.yaml, restart with:
+`sudo netplan apply`

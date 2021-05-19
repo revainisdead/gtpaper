@@ -144,6 +144,7 @@ USE_TZ = True
 
 #CSRF_COOKIE_NAME = "csrftoken"
 CSRF_COOKIE_SECURE = False # not https
+CSRF_COOKIE_HTTPONLY =  False
 
 # To extend default user model
 #AUTH_USER_MODEL = gtpaper.models.User
