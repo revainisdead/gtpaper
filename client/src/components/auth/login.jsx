@@ -58,7 +58,7 @@ export function fakeAsyncLogin(dispatch, ) {
 }
 
 const handleSubmit = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
 }
 
 function Login(props) {

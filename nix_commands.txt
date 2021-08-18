@@ -67,3 +67,14 @@ network:
 `sudo service networking restart`
 # For /etc/netplan/50-cloud-init.yaml, restart with:
 `sudo netplan apply`
+
+
+Get into Postgres
+--
+`sudo su - postgres`
+`psql`
+
+Run both the backend and frontend
+--
+`./start_api.sh`
+`npm start`
